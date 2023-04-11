@@ -1,9 +1,6 @@
-{# templates/login/index.html.twig #}
-{% extends 'base.html.twig' %}
+{% extends 'layouts/body.html.twig' %}
 
-{# ... #}
-
-{% block body %}
+{% block content %}
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
