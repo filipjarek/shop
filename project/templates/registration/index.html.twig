@@ -4,6 +4,73 @@
 
 {% block content %}
 
-    {{ form(registrationForm) }}
+	<div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-lg border-2">
+            
+            {{ form_start(registrationForm, { 'attr': {'class':  'mt-6 mb-0 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8'} }) }}
+				<p class="text-center text-lg font-medium text-gray-500">Create an account</p>
 
+			<div>
+                <div class="relative z-0 w-full mb-6 group">
+					<label class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-7 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+						{{ form_label(registrationForm.firstname) }}
+					</label>
+						{{ form_widget(registrationForm.firstname, { 'attr': {'class':  'block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-black peer'} }) }}
+					<div class="text-xs text-red-600 dark:text-red-500">
+						{{ form_errors(registrationForm.firstname) }}
+					</div>
+				</div>
+				<div class="relative z-0 w-full mb-6 group">
+					<label class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-7 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+						{{ form_label(registrationForm.lastname) }}
+					</label>
+						{{ form_widget(registrationForm.lastname, { 'attr': {'class': 'block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-black peer'} }) }}
+					<div class="text-xs text-red-600 dark:text-red-500">
+						{{ form_errors(registrationForm.lastname) }}
+					</div>
+				</div>
+				<div class="relative z-0 w-full mb-6 group">
+					<label class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-7 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+						{{ form_label(registrationForm.email) }}
+					</label>
+						{{ form_widget(registrationForm.email, { 'attr': {'class': 'block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-black peer'} }) }}
+					<div class="text-xs text-red-600 dark:text-red-500">
+						{{ form_errors(registrationForm.email) }}
+					</div>
+				</div>
+				<div class="relative z-0 w-full mb-6 group">
+					<label class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-7 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+						{{ form_label(registrationForm.plainPassword.first) }}
+					</label>
+						{{ form_widget(registrationForm.plainPassword.first, { 'attr': {'class': 'block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-black peer'} }) }}
+					<div class="text-xs text-red-600 dark:text-red-500">
+						{{ form_errors(registrationForm.plainPassword.first) }}
+					</div>
+				</div>
+				<div class="relative z-0 w-full mb-6 group">
+					<label class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-7 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+						{{ form_label(registrationForm.plainPassword.second) }}
+					</label>
+						{{ form_widget(registrationForm.plainPassword.second, { 'attr': {'class': 'block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-black peer'} }) }}
+					<div class="text-xs text-red-600 dark:text-red-500">
+						{{ form_errors(registrationForm.plainPassword.second) }}
+					</div>
+				</div>
+			</div>
+
+			<div class="container mt-4 space-y-8"></div>
+				<div class="group relative flex w-full justify-center border border-transparent bg-black py-2 px-4 text-sm font-semibold text-white  focus:outline-none mb-1">
+					{{ form_row(registrationForm.submit) }}
+				</div>
+
+				<a href="{{ path('app_login') }}">
+					<span class="flex w-full justify-center hover:underline mb-1 text-sm font-medium text-gray-500 py-1 px-1">
+						Already registered?
+					<span>
+				</a>
+
+			{{ form_end(registrationForm) }}
+			
+        </div>
+    </div>
 {% endblock %}
