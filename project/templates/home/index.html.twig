@@ -3,18 +3,35 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block content %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="container my-12 mx-auto px-4 md:px-12">
+        <div class="flex flex-wrap -mx-1 lg:-mx-4">
+     
+        {% for product in products %}
+    
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">   
+            <div class="overflow-hidden rounded-lg shadow-lg">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/project/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/project/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+                <a href="{{ path('app_home') }}">
+                    <img src="https://via.placeholder.com/400x200" alt="{{ product.name }}" class="card-img-top">
+                </a>
+
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                    <h1 class="text-lg">
+                        <a class="font-medium hover:underline text-black" href="{{ path('app_home') }}">
+                            {{ product.name }}
+                        </a>
+                        <p class="card-text text-sm">{{ product.description }}</p>
+                        <span class="font-semibold mt-auto">${{ product.price }}</span>
+                    </h1>
+                </header>
+
+            </div>
+        </div>
+
+        {% endfor %}
+
+        </div>
+    </div>
+
 {% endblock %}
