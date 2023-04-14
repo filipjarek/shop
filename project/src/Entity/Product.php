@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,6 +23,18 @@ class Product
 
     #[ORM\Column]
     private ?float $price = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updatedAt;
+
+    public function __construct()
+    {   
+        $this->updatedAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -62,5 +75,35 @@ class Product
         $this->price = $price;
 
         return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    #[ORM\PreUpdate]
+    public function preUpdate()
+    {
+        $this->updatedAt = new \DateTimeImmutable();
     }
 }
