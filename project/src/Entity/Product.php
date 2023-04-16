@@ -30,6 +30,9 @@ class Product
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt;
 
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    private ?Category $category = null;
+
     public function __construct()
     {   
         $this->updatedAt = new \DateTimeImmutable();
@@ -105,5 +108,17 @@ class Product
     public function preUpdate()
     {
         $this->updatedAt = new \DateTimeImmutable();
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
     }
 }
