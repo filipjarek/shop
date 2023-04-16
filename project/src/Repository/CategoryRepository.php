@@ -39,6 +39,17 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
+    public function findOneBySlug(string $slug): ?Category
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->andWhere('c.isActive = true')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 //    /**
 //     * @return Category[] Returns an array of Category objects
 //     */
