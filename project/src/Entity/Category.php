@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use DateTimeImmutable;
 use Cocur\Slugify\Slugify;
-use App\Repository\CategoryRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {
@@ -27,16 +28,18 @@ class Category
     private ?bool $isActive = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?\DateTimeImmutable $createdAt;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $updatedAt = null;
+    private ?\DateTimeImmutable $updatedAt;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
     private Collection $products;
 
     public function __construct()
-    {
+    {   
+        $this->updatedAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTimeImmutable();
         $this->products = new ArrayCollection();
     }
 
@@ -111,6 +114,12 @@ class Category
         return $this;
     }
 
+    #[ORM\PreUpdate]
+    public function preUpdate()
+    {
+        $this->updatedAt = new \DateTimeImmutable();
+    }
+
     /**
      * @return Collection<int, Product>
      */
@@ -139,5 +148,10 @@ class Category
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
