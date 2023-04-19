@@ -1,20 +1,32 @@
 <div class="container my-12 mx-auto px-4 md:px-12">
 
-    {% if products|length == 1 %}
+     {% if products|length > 1 %}
+   
+    <select class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg block w-1/6 p-2.5" onChange="window.location=this.value;">
+        <option selected>Sort</option>
+        {{ knp_pagination_sortable(products, 'Name A-Z', 'name', {}, {'direction': 'asc'}) }}
+        {{ knp_pagination_sortable(products, 'Name Z-A', 'name', {}, {'direction': 'desc'}) }}
+        {{ knp_pagination_sortable(products, 'Prices ascending', 'price', {}, {'direction': 'asc'}) }}
+        {{ knp_pagination_sortable(products, 'Prices descending', 'price', {}, {'direction': 'desc'}) }}
+    </select>
+    
+    {% endif %}
 
-		<div class="count text-gray-400 flex items-end justify-end">
+    <div class="count text-gray-400 flex justify-end ">
+    
+        {% if products|length == 1 %}
+
             {{ products.getTotalItemCount }} Product
-        </div>
+      
+    	{% elseif products|length == 0 %}
 
-	{% elseif products|length == 0 %}
-
-	{% else %}
-
-        <div class="count text-gray-400 flex items-end justify-end">
+    	{% else %}
+    
             {{ products.getTotalItemCount }} Products
-        </div>
+   
+	    {% endif %}
 
-	{% endif %}
+    </div>
 
     <div class="flex flex-wrap -mx-1 lg:-mx-4">
      
