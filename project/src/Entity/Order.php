@@ -20,13 +20,20 @@ class Order
     private Collection $items;
 
     #[ORM\Column(length: 255)]
-    private ?string $status = null;
+    private ?string $status = self::STATUS_CART;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
+
+     /**
+     * An order that is in progress, not placed yet.
+     *
+     * @var string
+     */
+    public const STATUS_CART = 'cart';
 
     public function __construct()
     {
@@ -48,10 +55,19 @@ class Order
 
     public function addItem(OrderItem $item): self
     {
-        if (!$this->items->contains($item)) {
-            $this->items->add($item);
-            $item->setOrderRef($this);
+        foreach ($this->getItems() as $existingItem) {
+            
+            if ($existingItem->equals($item)) {
+                $existingItem->setQuantity(
+                    $existingItem->getQuantity() + $item->getQuantity()
+                );
+
+                return $this;
+            }
         }
+
+        $this->items[] = $item;
+        $item->setOrderRef($this);
 
         return $this;
     }
@@ -63,6 +79,20 @@ class Order
             if ($item->getOrderRef() === $this) {
                 $item->setOrderRef(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Removes all items from the order.
+     *
+     * @return $this
+     */
+    public function removeItems(): self
+    {
+        foreach ($this->getItems() as $item) {
+            $this->removeItem($item);
         }
 
         return $this;
@@ -102,5 +132,19 @@ class Order
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * Calculates the order total.
+     */
+    public function getTotal(): float
+    {
+        $total = 0;
+
+        foreach ($this->getItems() as $item) {
+            $total += $item->getTotal();
+        }
+
+        return $total;
     }
 }
