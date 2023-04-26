@@ -67,4 +67,22 @@ class OrderItem
 
         return $this;
     }
+
+    /**
+     * Tests if the given item given corresponds to the same order item.
+     */
+    public function equals(OrderItem $item): bool
+    {
+        return $this->getProduct()->getId() === $item->getProduct()->getId();
+    }
+
+    /**
+     * Calculates the item total.
+     *
+     * @return float|int
+     */
+    public function getTotal(): float
+    {
+        return $this->getProduct()->getPrice() * $this->getQuantity();
+    }
 }
