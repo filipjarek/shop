@@ -18,5 +18,7 @@
 ## Features
 
 ## Screenshots
+![Login](./Screenshots/Screenshot_1.png)
+![Shop page](./Screenshots/Screenshot_2.png)
 
 ## Setup
