@@ -11,13 +11,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('/', name: 'app_home', methods: ['GET'])]
     public function index(Request $request, ProductRepository $productRepository, PaginatorInterface $paginator): Response
     {
         $products = $paginator->paginate(
             $productRepository->findAll(),
             $request->query->getInt('page', 1),
-            9
+            12
         );
 
         return $this->render('home/index.html.twig', [
