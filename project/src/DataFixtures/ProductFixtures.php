@@ -15,7 +15,7 @@ class ProductFixtures extends Fixture
             $product
                 ->setName('Product ' . $i)
                 ->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit')
-                ->setPrice(mt_rand(40, 960));
+                ->setPrice(mt_rand(39, 899));
 
             $manager->persist($product);
         }
