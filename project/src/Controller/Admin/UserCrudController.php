@@ -27,12 +27,6 @@ class UserCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Shop Users');
     }
 
-    public function configureFilters(Filters $filters): Filters
-    {
-        return $filters
-            ->add(TextFilter::new('email', 'Email'));
-    }
-
     public function configureFields(string $pageName): iterable
     {
         yield IdField::new('id')->onlyOnIndex();
