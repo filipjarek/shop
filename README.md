@@ -5,6 +5,7 @@
 * [Features](#features)
 * [Screenshots](#screenshots)
 * [Setup](#setup)
+* [Testing](#testing)
 
 ## Technologies Used
 
@@ -22,3 +23,10 @@
 ![Shop page](./Screenshots/Screenshot_2.png)
 
 ## Setup
+
+## Testing
+```
+$ ./vendor/phpunit/phpunit/phpunit
+$ php bin/phpunit
+```
+Run the tests using PHPUnit package
