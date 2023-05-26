@@ -23,7 +23,41 @@
 ![Shop page](./Screenshots/Screenshot_2.png)
 
 ## Setup
+#### Step 1 : Clone the project
+```
+$ git clone https://github.com/filipjarek/shop
+```
+#### Step 2 : Change current directory
+```
+$ cd shop
+```
+#### Step 3 : Configuration
+```
+Set the database (mysql) in .env file db_name, db_username and db_password.
+```
+#### Step 4 : Install dependencies
+```
+$ composer install
+$ npm install
+$ npm run build
+```
+#### Step 5 : Setup database
+```
+$ php bin/console doctrine:database:create
+$ php bin/console make:migration
+$ php bin/console doctrine:fixtures:load
+```
+#### Step 6 : Run the project
+```
+$ symfony serve -d
+```
+Open link in your browser: http://localhost:8000:
 
+#### Admin credentails
+```
+e-mail: admin@gmail.com
+password: password
+```
 ## Testing
 ```
 $ ./vendor/phpunit/phpunit/phpunit
